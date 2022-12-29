@@ -8,7 +8,7 @@ async function main() {
   A contractFactor in ethers.js is an abstraction used to deploy new smart contacts
   so exchangeContract here is a factory for instances of our Exchange contract.
   */
-  const exchangeContract = await ethers.getcontractFactory("Exchange");
+  const exchangeContract = await ethers.getContractFactory("Exchange");
 
   // here we deploy the contract
   const deployedExchangeContract = await exchangeContract.deploy(
