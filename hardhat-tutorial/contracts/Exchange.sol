@@ -133,12 +133,12 @@ contract Exchange is ERC20 {
      * @dev swaps eth for cryptodev tokens
      */
     function ethToCryptoDevToken(uint _minTokens) public payable {
-        uint256 tokenreserve = getReserve();
+        uint256 tokenReserve = getReserve();
         // call the 'getAmountOfTokens' to get the amount of tokens that would be returnedt o the user after
         // the swap. notice that the 'inputReserve' we are sending is equal to
         // "address(this).balance - msg.value" instead of just 'addres(this).balance
         // because 'address(this).balance' already contains the 'msg.value' user has sent in the given call
-        uint256 tokensBought = getAmountofTokens(
+        uint256 tokensBought = getAmountOfTokens(
             msg.value,
             address(this).balance - msg.value,
             tokenReserve
