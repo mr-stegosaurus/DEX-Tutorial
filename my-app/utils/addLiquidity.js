@@ -8,8 +8,8 @@ import {
 
 /**
  *addLiquidity helps add liquidity to the exchange,
- if the user is adding initial liquidity, user decides the ether and CD tokens he wants to add to the exchange. 
- if he is adding the liquidity after, then we calculate the CryptoDev tokens he can add, given the Eth he wants to add
+ if the user is a liquidity, user decides the ether and CD tokens he wants to add to the exchange. 
+ if he is adding the liquidity after, then we calculate the CryptoDev tokens he can add,dding initial given the Eth he wants to add
  by keeping the ratios constant
  */
 export const addLiquidity = async (
