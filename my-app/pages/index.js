@@ -31,7 +31,7 @@ export default function Home() {
   // 'ethBalance' keeps track of the amount of Eth held by the user's account
   const [ethBalance, setEtherBalance] = useState(zero);
   // 'reservedCD' keeps track of the Crypto Dev tokens Reserve balance in the Exchange contract
-  const [reservedCD, setReservedCD] = useSTate(zero);
+  const [reservedCD, setReservedCD] = useState(zero);
   // keeps track of the ether balance in the contract
   const [etherBalanceContract, setEtherBalanceContract] = useState(zero);
   // cdBalance is the amount of 'CD' tokens help by the users account
@@ -292,7 +292,7 @@ export default function Home() {
     const web3Provider = new providers.Web3Provider(provider);
 
     // if user is not connected to Goerli network, let them know and throw error
-    const { chainId } = await web3ModalRef.current.getNetwork();
+    const { chainId } = await web3Provider.getNetwork();
     if (chainId !== 5) {
       window.alert("Change the network to Goerli");
       throw new Error("Change network to Goerli");
@@ -327,7 +327,7 @@ export default function Home() {
   */
   const renderButton = () => {
     // if wallet is not connected, return a button which allows them to connect their wallet
-    if (!walletconnected) {
+    if (!walletConnected) {
       return (
         <button onClick={connectWallet} className={styles.button}>
           Connect your wallet
@@ -399,7 +399,7 @@ export default function Home() {
                 />
                 <div className={styles.inputDiv}>
                   {/* Convert the BigNumber to string using the formatEther function from ethers.js */}
-                  {'You will need ${utils.formatEther(addCDTokens)} Crypto Dev Tokens'}
+                  You will need {utils.formatEther(addCDTokens)} Crypto Dev Tokens
                 </div>
                 <button className={styles.button1} onClick={_addLiquidity}>
                   Add
@@ -414,12 +414,13 @@ export default function Home() {
                   setRemoveLPTokens(e.target.value || "0");
                   // calculate the amount of ether and CD tokens that the user would receive
                   // after he removes 'e.target.value' amount of 'LP' tokens
+                  await _getTokensAfterRemove(e.target.value || "0");
                 }}
                 className={styles.input}
               />
               <div className={styles.inputDiv}>
                 {/* convert the BigNumber to string using the formatEther function from ethers.js */}
-                {'You will get ${utils.formatEther(removeCD)} Crypto Dev Tokens and ${utils.formatEther(removeEther)} Eth'}
+                You will get {utils.formatEther(removeCD)} Crypto Dev Tokens and {utils.formatEther(removeEther)} Eth
               </div>
               <button className={styles.button1} onClick={_removeLiquidity}>
                 Remove
@@ -459,9 +460,9 @@ export default function Home() {
           <br />
           <div className={styles.inputDiv}>
             {/* Convert BigNumber to string using the formatEther function from ethers.js */}
-            {ethSelected
-              ? 'You will get ${utils.formatEther(tokenToBeReceivedAfterSwap)} Crypto Dev Tokens'
-              : 'You will get ${utils.formatEther(tokenToBeReceivedAfterSwap)} Eth'}
+            ethSelected
+              ? You will get {utils.formatEther(tokenToBeReceivedAfterSwap)} Crypto Dev Tokens
+              : You will get {utils.formatEther(tokenToBeReceivedAfterSwap)} Eth
           </div>
           <button className={styles.button1} onClick={_swapTokens}>
             Swap
@@ -504,7 +505,7 @@ export default function Home() {
       </div>
 
       <footer className={styles.footer}>
-        Made with &#10048; by Crypto Devs
+        Made with &#10084; by Crypto Devs
       </footer>
     </div>
   );

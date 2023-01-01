@@ -4,7 +4,7 @@ import {
     EXCHANGE_CONTRACT_ADDRESS,
     TOKEN_CONTRACT_ABI,
     TOKEN_CONTRACT_ADDRESS,
-} from "..constants";
+} from "../constants";
 
 /**
  * getEtherBalance: retrieves the ether balance of the user or the contract
@@ -49,7 +49,7 @@ export const getCDTokensBalance = async (provider, address) => {
  * getLPTokensBalance: retrives the amount of LP tokens in the account
  * of the provided 'address'
  */
-export const getLPTokenBalance = async (provider, address) => {
+export const getLPTokensBalance = async (provider, address) => {
     try {
         const exchangeContract = new Contract(
             EXCHANGE_CONTRACT_ADDRESS,
